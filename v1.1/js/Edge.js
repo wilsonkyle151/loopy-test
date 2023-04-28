@@ -85,6 +85,7 @@ function Edge(model, config){
 			var signal = self.signals[i];
 			var lastPosition = signal.position;
 			signal.position += self.signalSpeed;
+			//console.log("delta:" + signal.delta);
 
 			// If crossed the 0.5 mark...
 			/*
@@ -94,7 +95,7 @@ function Edge(model, config){
 				signal.delta *= self.strength;
 
 			}
-
+			
 			// And also TWEEN the scale.
 			var gotoScaleX = Math.abs(signal.delta);
 			var gotoScaleY = signal.delta;
@@ -109,7 +110,12 @@ function Edge(model, config){
 		while(lastSignal && lastSignal.position>=1){
 
 			// Actually pass it along
-			lastSignal.delta *= self.strength; // flip at the end only!
+			if(Math.abs(self.strength) === 1){
+				lastSignal.delta *= self.strength;
+			} else {
+				lastSignal.delta = self.strength * .33 * ((lastSignal.delta < 0 )? -1:1);
+			}
+			 // flip at the end only!
 			self.to.takeSignal(lastSignal);
 			
 			// Pop it, move on down
@@ -282,7 +288,7 @@ function Edge(model, config){
 		else if(s>=-1) l="–"; // EM dash, not hyphen.
 		else if(s>=-2) l="– –";
 		else l="– – –";
-		self.label = l;
+		self.label = self.strength;
 
 		// Label position
 		var labelPosition = self.getPositionAlongArrow(0.5);

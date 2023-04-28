@@ -109,6 +109,12 @@ function Node(model, config){
 		myEdges = _shiftArray(myEdges, shiftIndex);
 		shiftIndex = (shiftIndex+1)%myEdges.length;
 		for(var i=0; i<myEdges.length; i++){
+			console.log("Delta:" + signal.delta);
+			console.log("Strength:" + myEdges[i].strength);
+			if(!Math.abs(myEdges[i].strength) === 1) {
+				signal.delta = (signal.delta/.33 - myEdges[i].strength) * .33;
+			}
+			//console.log("Delta after:" + signal.delta);
 			myEdges[i].addSignal(signal);
 		}
 	};
@@ -116,8 +122,11 @@ function Node(model, config){
 	self.takeSignal = function(signal){
 
 		// Change value
+		console.log("Delta in take signal: " + signal.delta)
+		console.log("Value before delta in take signal:" + self.value);
 		self.value += signal.delta;
-
+		console.log("Value after delta in take signal:" + self.value);
+		console.log("------------------------------------------------")
 		// Propagate signal
 		self.sendSignal(signal);
 		// self.sendSignal(signal.delta*0.9); // PROPAGATE SLIGHTLY WEAKER

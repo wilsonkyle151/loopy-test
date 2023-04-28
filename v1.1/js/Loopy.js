@@ -239,7 +239,7 @@ function Loopy(config){
 			signal = JSON.parse(signal);
 			var node = self.model.getNode(signal[0]);
 			node.takeSignal({
-				delta: signal[1]*0.33
+				delta: signal[1]*0.33 
 			});
 		}
 
