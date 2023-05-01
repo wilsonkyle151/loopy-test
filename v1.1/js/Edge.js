@@ -382,7 +382,7 @@ function Edge(model, config){
 	self.draw = function(ctx){
 
 		// Width & Color
-		ctx.lineWidth = 4*Math.abs(self.strength)-2;
+		ctx.lineWidth = 4*Math.abs(.33)-2; //hard coded one strength delta value
 		ctx.strokeStyle = "#666";
 
 		// Translate & Rotate!
