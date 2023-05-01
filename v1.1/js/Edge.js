@@ -147,7 +147,18 @@ function Edge(model, config){
 
 			// Signal's direction & size
 			var size = 40; // HARD-CODED
-			ctx.scale(signal.scaleX, signal.scaleY);
+			var lastSignal = self.signals[self.signals.length-1];
+			if (Math.abs(self.strength) > 1) {
+				let scaleX = .33;
+				let scaleY = .33 * ((lastSignal.delta < 0)? -1:1);
+				ctx.scale(scaleX, scaleY);
+			} else if (Math.abs(self.strength) < .6) {
+				let scaleX = .198;
+				let scaleY = .198 * ((lastSignal.delta < 0)? -1:1);
+				ctx.scale(scaleX, scaleY);
+			} else {
+				ctx.scale(signal.scaleX, signal.scaleY);
+			}
 			ctx.scale(size, size);
 
 			// Signal's COLOR, BLENDING
