@@ -430,7 +430,11 @@ function Edge(model, config){
 		ctx.save();
 		ctx.translate(lx, ly);
 		ctx.rotate(-a);
-		ctx.fillStyle = "#999";
+		if ( self.label > 0 ) {
+			ctx.fillStyle = "#00FF00";
+		} else if ( self.label < 0 ) {
+			ctx.fillStyle = "#FF0000";
+		}
 		ctx.fillText(self.label, 0, 0);
 		ctx.restore();
 
