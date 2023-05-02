@@ -145,11 +145,11 @@ function Edge(model, config){
 			// Signal's direction & size
 			var size = 40; // HARD-CODED
 			var lastSignal = self.signals[self.signals.length-1];
-			if (Math.abs(self.strength) > 1) {
+			if (Math.abs(self.strength) >= 1) {
 				let scaleX = .33;
 				let scaleY = .33 * ((lastSignal.delta < 0)? -1:1);
 				ctx.scale(scaleX, scaleY);
-			} else if (Math.abs(self.strength) < .6) {
+			} else if (Math.abs(self.strength) <= .6) {
 				let scaleX = .198;
 				let scaleY = .198 * ((lastSignal.delta < 0)? -1:1);
 				ctx.scale(scaleX, scaleY);
