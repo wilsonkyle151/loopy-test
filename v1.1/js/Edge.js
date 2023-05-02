@@ -110,11 +110,8 @@ function Edge(model, config){
 		while(lastSignal && lastSignal.position>=1){
 
 			// Actually pass it along
-			if(Math.abs(self.strength) === 1){
-				lastSignal.delta *= self.strength;
-			} else {
-				lastSignal.delta = self.strength * .33 * ((lastSignal.delta < 0 )? -1:1);
-			}
+			lastSignal.delta = self.strength * .33 * ((lastSignal.delta < 0 )? -1:1);
+			
 			 // flip at the end only!
 			self.to.takeSignal(lastSignal);
 			
