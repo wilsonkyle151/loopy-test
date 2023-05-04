@@ -109,9 +109,6 @@ function Node(model, config){
 		myEdges = _shiftArray(myEdges, shiftIndex);
 		shiftIndex = (shiftIndex+1)%myEdges.length;
 		for(var i=0; i<myEdges.length; i++){
-			if(!Math.abs(myEdges[i].strength) === 1) {
-				signal.delta = (signal.delta/.33 - myEdges[i].strength) * .33;
-			}
 			myEdges[i].addSignal(signal);
 		}
 	};
