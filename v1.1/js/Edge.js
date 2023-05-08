@@ -8,6 +8,7 @@ Edge.allSignals = [];
 Edge.MAX_SIGNALS = 100;
 Edge.MAX_SIGNALS_PER_EDGE = 10;
 Edge.defaultStrength = 1;
+Edge.defaultSpeed = 1;
 
 function Edge(model, config){
 
@@ -25,7 +26,8 @@ function Edge(model, config){
 		to: _makeErrorFunc("CAN'T LEAVE 'TO' BLANK"),
 		arc: 100,
 		rotation: 0,
-		strength: Edge.defaultStrength
+		strength: Edge.defaultStrength,
+		speed: Edge.defaultSpeed
 	});
 
 	// Get my NODES
@@ -76,7 +78,14 @@ function Edge(model, config){
 	self.updateSignals = function(){
 
 		// Speed?
-		var speed = Math.pow(2,self.loopy.signalSpeed);
+		if(self.speed === 1) {
+			var speed = Math.pow(2,self.loopy.signalSpeed);
+		} else if (self.speed < 1) {
+			var speed = Math.pow(2,self.loopy.signalSpeed) / Math.abs(Edge.defaultSpeed);
+		} else if (self.speed > 1){
+			var speed = Math.pow(2,self.loopy.signalSpeed) * Math.abs(Edge.defaultSpeed);
+		}
+		
 		self.signalSpeed = speed/self.getArrowLength();
 
 		// Move all signals along

@@ -103,6 +103,15 @@ function Sidebar(loopy){
 			html: "(to make a stronger relationship, draw multiple arrows!)<br><br>"+
 			"(to make a delayed relationship, draw longer arrows)"
 		}));
+		page.addComponent("speed", new ComponentSlider({
+			bg: "speed",
+			label: "Speed:",
+			//label: "Relationship:",
+			options: [3,2,1,-2,-3], 
+			oninput: function(value){
+				Edge.defaultSpeed = value;
+			}
+		}));
 		page.addComponent(new ComponentButton({
 			//label: "delete edge",
 			label: "delete arrow",
